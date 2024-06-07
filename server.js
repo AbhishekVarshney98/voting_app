@@ -11,9 +11,8 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.status(200).json({message: "hello"})
+    res.status(200).json({ message: "Welcome to the Voting App" });
 });
-
 
 //Routes
 app.use('/user',userRoute);
