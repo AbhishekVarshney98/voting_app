@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 //Routes
 app.use('/user',userRoute);
-app.use('/candidate',candidateRoute);
+app.use('/candidate', candidateRoute);
 
 //Server listening on PORT
 app.listen(PORT, () => {

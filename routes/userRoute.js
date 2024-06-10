@@ -91,6 +91,7 @@ router.put('/profile/password', jwtAuthMiddleware, async (req, res) => {
             return res.status(401).json({message: "Please enter a new password"})
         }
         const userData = await User.findById(data.id);
+        console.log(userData);
         const comparePassword = await bcrypt.compare(currentPassword, userData.password);
         if(!comparePassword){
             return res.status(500).json({error: "Invalid Current Password"});
