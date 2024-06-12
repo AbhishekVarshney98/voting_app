@@ -12,6 +12,15 @@ const createHash = (plaintext) => {
     return hashedPassword
 }
 
+//function to check if admin role exist in user already or not as only one admin is allowed
+const checkAdmin = async () => {
+    const adminUser = await User.findOne({ role:'admin' });
+    console.log(adminUser);
+    if (adminUser){
+        return true
+    }
+    return false
+}
 
 //signup API
 router.post('/signup', async (req, res) => {
@@ -19,6 +28,9 @@ router.post('/signup', async (req, res) => {
         const data = req.body;
         // console.log(data.password)
         data.password = await createHash(data.password)
+        if (data.role==='admin' && await checkAdmin(data)){
+            return res.status(403).json({error: "Admin user already exists."});
+        }
         // console.log(data.password)
         const newUser = new User(data);
         const response = await newUser.save();
